@@ -1,5 +1,6 @@
 import Banner from "@/component/Banner";
 import Featured from "@/component/Featured";
+import WhyAdopt from "@/component/WhyAdopt";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
       <div>
         <Banner></Banner>
         <Featured></Featured>
+        <WhyAdopt></WhyAdopt>
       </div>
   );
 }
