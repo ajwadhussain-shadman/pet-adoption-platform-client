@@ -4,7 +4,9 @@ import bannerImg from '@/assets/banner.png'
 import { Button } from '@heroui/react';
 const Banner = () => {
     return (
-        <div className='container mx-auto my-5 flex flex-col md:flex-row justify-between gap-4'>
+  
+         <div className='bg-slate-100 p-5'>
+              <div className='container mx-auto  flex flex-col md:flex-row justify-between gap-4 p-4 '>
             <div>
             <Image className='rounded-2xl hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl shadow-lg w-3/4 mx-auto md:w-[500px]' src={bannerImg} alt='banner img' height={500} width={ 500} ></Image>
             </div>
@@ -16,6 +18,9 @@ const Banner = () => {
                 <Button className='bg-pink-600 ' size='lg' >Adopt Now</Button>
             </div>
         </div>
+         </div>
+         
+      
     );
 };
 
