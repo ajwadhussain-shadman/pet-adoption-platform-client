@@ -1,12 +1,13 @@
 import { Avatar, Badge, Button, Card } from '@heroui/react';
+import Link from 'next/link';
 import React from 'react';
 import { GoDot } from 'react-icons/go';
 
 const PetCard = ({ pet }) => {
-    const {petName,gender,age,breed,species,imageUrl,adoptionFee,status}=pet;
+    const {_id,petName,gender,age,breed,species,imageUrl,adoptionFee,status}=pet;
     return (
         <div>
-            <Card>
+            <Card className='max-w-[400px]'>
                <div className="h-[280px] w-full ">
                    <img
       src={imageUrl}
@@ -31,7 +32,7 @@ const PetCard = ({ pet }) => {
                     <p className='text-xl font-semibold text-pink-700'> ${adoptionFee}</p>
                 </div>
                 <div className='flex gap-15 justify-center bg-slate-200 p-2 rounded-full'>
-                    <Button className='bg-pink-600'>View Details</Button>
+                    <Button className='bg-pink-600'> <Link href={`/pet-details/${_id}`} >View Details</Link> </Button>
                     <Button>Adopt Now</Button>
                 </div>
             </Card>

@@ -1,0 +1,62 @@
+import PetCard from '@/shared/PetCard';
+import { Button, Card, CloseButton } from '@heroui/react';
+import React from 'react';
+import { BiInjection } from 'react-icons/bi';
+import { GiHealthNormal } from 'react-icons/gi';
+import { IoLocationSharp } from 'react-icons/io5';
+import { MdAttachMoney } from 'react-icons/md';
+
+const PetDetailsPage = async ({ params }) => {
+    const { id } = await params;
+    const res = await fetch(`http://localhost:8000/pets/${id}`);
+    const pet = await res.json();
+    const { _id, petName, gender, age, breed, species, imageUrl, adoptionFee, status, description,
+        healthStatus,vaccinationStatus ,location} = pet;
+    console.log(pet)
+    return (
+        <div>
+            <Card className="w-full items-stretch md:flex-row">
+                <div className="h-full w-[400px] ">
+                    <img
+                        src={imageUrl}
+                        alt={petName}
+                        className="h-full w-full object-cover rounded-2xl "
+                    />
+
+                </div>
+                <div className="flex flex-1 flex-col gap-3 my-5">
+                    <Card.Header className="gap-1 space-y-5 ">
+                        <Card.Title className="pr-8 text-3xl font-bold text-pink-600">{petName}</Card.Title>
+                        <Card.Description>
+                            {description}
+                        </Card.Description>
+
+                        <div className='grid grid-cols-2  font-semibold text-pink-600'>
+                            <p>Age:{age}</p>
+                            <p> Species : {species}</p>
+                            <p> Breed : {breed}</p>
+                            <p> Gender :  {gender}</p>
+                            
+                        </div>
+                        <div className='flex gap-10 '>
+                            <p className='flex items-center gap-1 font-semibold'> <GiHealthNormal className='inline-block text-pink-600 ' />Health: {healthStatus}</p>
+                            <p className='flex items-center gap-1 font-semibold'> <BiInjection className='inline-block text-pink-600 ' />Vaccination: {vaccinationStatus}</p>
+                        </div>
+                        <div>
+                
+                            <p className='flex items-center gap-1 font-semibold text-slate-500'> <IoLocationSharp className='inline-block text-pink-600 ' />Location: {location},Bangladesh</p>
+                        </div>
+                        <p className='flex items-center gap-1 font-semibold text-slate-500'> <MdAttachMoney className='inline-block text-pink-600 ' />AdoptionFee : ${adoptionFee}</p>
+
+                    </Card.Header>
+                    <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        
+                        <Button className="w-full sm:w-auto">Apply Now</Button>
+                    </Card.Footer>
+                </div>
+            </Card>
+        </div>
+    );
+};
+
+export default PetDetailsPage;
