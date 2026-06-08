@@ -6,7 +6,7 @@ const WhyAdopt = () => {
     return (
         <div className='w-11/12 mx-auto'>
             <h2 className='text-2xl font-bold text-center'>Why Adopt Pets?</h2>
-            <div className='flex flex-col md:flex-row gap-4 my-5'>
+            <div className='flex flex-col md:flex-row gap-4  my-5'>
                 <Card>
                   <div className='flex gap-5'>
                       <p className='bg-pink-50 p-2 text-3xl text-pink-600 rounded-full h-[50px] max-w-[100px] text-center flex items-center justify-center'><FaRegHeart /></p>
