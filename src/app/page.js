@@ -17,6 +17,7 @@ export default function Home() {
         <PetCare></PetCare>
         <HowAdoptionWork></HowAdoptionWork>
         <RelatedVideos></RelatedVideos>
+        
       </div>
   );
 }
