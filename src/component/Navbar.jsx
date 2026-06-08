@@ -1,13 +1,21 @@
 
 'use client'
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import PetLogo from '@/assets/pet-adoption-logo.png'
 import Link from 'next/link';
 import { Button, Dropdown, Label } from '@heroui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import NavLink from '@/shared/NavLink';
+import { authClient } from '@/lib/auth-client';
+import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 const Navbar = () => {
+  const [open,setOpen]=useState(false);
+  const userData= authClient.useSession();
+ const user=userData?.data?.user;
+  const handleSignOut= async ()=>{
+await authClient.signOut();
+  }
     return (
         <div className='shadow '>
             <nav className='flex justify-between items-center container  mx-auto '>
@@ -41,21 +49,41 @@ const Navbar = () => {
 
            <div className='flex gap-2'>
 
-             <Dropdown >
+
+            <div>
+              {
+                user ? 
+                <Dropdown onOpenChange={setOpen}>
      
-       <Button className='bg-pink-600'>Profile</Button>
+       <Button className='bg-pink-50'>
+        <Image className='rounded-full' src={user.image} alt={user.name} height={40} width={40}></Image>
+        {
+          open ? <FaArrowUp className='inline-block text-black ml-2' /> : <FaArrowDown className='inline-block text-black ml-2' />
+        }
+
+       </Button>
       
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
-             <Button className='text-pink-700 bg-pink-100 w-full'><Link href={'/login'}>Login</Link></Button>
+         <Button className='text-pink-700 bg-pink-100 w-full'> <Link href={'/sign-up'}>DashBoard</Link></Button>
           </Dropdown.Item>
           <Dropdown.Item id="copy-link" textValue="Copy link">
-           <Button className='text-pink-700 bg-pink-100 w-full'> <Link href={'/sign-up'}>Sign Up</Link></Button>
+            <Button className='text-pink-700 bg-pink-100 w-full' onClick={handleSignOut}> <Link href={'/sign-up'}>LogOut</Link></Button>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>
     </Dropdown>
+                
+                
+                 : <div className='flex gap-3'>
+
+                   <Button className='text-white bg-pink-700 w-full'><Link href={'/login'}>Login</Link></Button>
+                   <Button className='text-pink-700 bg-pink-100 w-full'> <Link href={'/sign-up'}>Sign Up</Link></Button>
+                </div>
+              }
+            </div>
+
            </div>
         </nav>
         </div>
