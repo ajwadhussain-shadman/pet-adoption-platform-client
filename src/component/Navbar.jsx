@@ -66,7 +66,8 @@ await authClient.signOut();
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
-         <Button className='text-pink-700 bg-pink-100 w-full'> <Link href={'/sign-up'}>DashBoard</Link></Button>
+         <Button className='text-pink-700 bg-pink-100 w-full'> <Link href={'/dashboard'}>DashBoard</Link></Button>
+        
           </Dropdown.Item>
           <Dropdown.Item id="copy-link" textValue="Copy link">
             <Button className='text-pink-700 bg-pink-100 w-full' onClick={handleSignOut}> <Link href={'/sign-up'}>LogOut</Link></Button>
