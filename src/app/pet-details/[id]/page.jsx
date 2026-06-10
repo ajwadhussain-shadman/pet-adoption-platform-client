@@ -17,7 +17,7 @@ const session = await auth.api.getSession({
     const user = session?.user;
 
     const { id } = await params;
-    const res = await fetch(`http://localhost:8000/pets/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`);
     const pet = await res.json();
     const { _id, petName, gender, age, breed, species, imageUrl, adoptionFee, status, description,
         healthStatus,vaccinationStatus ,location,ownerEmail} = pet;
