@@ -23,7 +23,7 @@ const AdoptModal =  ({ pet }) => {
             requestDate: new Date(),
            };
            console.log(requestData)
-           const res = await fetch(`http://localhost:8000/request`,
+           const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request`,
                        {
                            method: 'POST',
                            headers: {

@@ -10,7 +10,7 @@ import { MdDeleteOutline } from 'react-icons/md';
 const RequestCard = ({ req }) => {
     const { _id, petImage, petName, requestDate, pickupDate, status, petId } = req
     const handleDelete = async (id) => {
-        const res = await fetch(`http://localhost:8000/request/delete/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/delete/${id}`, {
             method: 'DELETE'
         })
         const data = await res.json();

@@ -10,7 +10,7 @@ const MyListings = async () => {
     });
     const user = session?.user;
     console.log(user?.email)
-    const res = await fetch(`http://localhost:8000/pets?email=${user?.email}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets?email=${user?.email}`);
     const myPets = await res.json();
 
     return (

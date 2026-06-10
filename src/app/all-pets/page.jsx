@@ -14,7 +14,7 @@ const AllPets = () => {
 
   const fetchAllPets = async () => {
 
-    let url = `http://localhost:8000/pets?`;
+    let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/pets?`;
     if (search) url += `search=${search}&`;
     if (species) url += `species=${species}`;
 

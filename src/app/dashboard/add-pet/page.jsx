@@ -27,7 +27,7 @@ const AddPet = () => {
             species,
         }
         console.log(petData)
-        const res = await fetch(`http://localhost:8000/pets`,
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets`,
             {
                 method: 'POST',
                 headers: {

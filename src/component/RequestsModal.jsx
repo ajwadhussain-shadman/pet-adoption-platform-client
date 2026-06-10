@@ -12,7 +12,7 @@ const RequestsModal = ({ petId, petName }) => {
     const [request, setRequest] = useState(null);
 
     const fetchData = async () => {
-        const res = await fetch(`http://localhost:8000/request/pet/${petId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/pet/${petId}`);
         const data = await res.json();
         setLoading(false)
         setRequest(data);
@@ -23,7 +23,7 @@ const RequestsModal = ({ petId, petName }) => {
     }, [petId])
 
     const handleApprove = async (id) => {
-        const res = await fetch(`http://localhost:8000/request/approve/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/approve/${id}`, {
             method: 'PATCH',
         });
         if (res.ok) {
@@ -33,7 +33,7 @@ const RequestsModal = ({ petId, petName }) => {
     }
 
     const handleReject = async (id) => {
-        const res = await fetch(`http://localhost:8000/request/rejected/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/rejected/${id}`, {
             method: 'PATCH'
         });
         if (res.ok) {

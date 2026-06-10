@@ -9,7 +9,7 @@ const MyRequests =async() => {
         });
         const user = session?.user;
         console.log(user?.email)
-        const res = await fetch(`http://localhost:8000/request?email=${user?.email}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request?email=${user?.email}`);
         const myRequest = await res.json();
         console.log(myRequest)
     return (

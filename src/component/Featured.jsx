@@ -5,7 +5,7 @@ import React from 'react';
 import { FaArrowRight, FaPaw } from 'react-icons/fa';
 
 const Featured = async () => {
-    const res= await fetch("http://localhost:8000/featured");
+    const res= await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`);
     const pets=await res.json();
     return (
         <div className='bg-pink-50 '> 
