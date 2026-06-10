@@ -33,7 +33,7 @@ const PetCard = ({ pet }) => {
                 </div>
                 <div className='flex gap-15 justify-center bg-slate-200 p-2 rounded-full'>
                     <Button className='bg-pink-600'> <Link href={`/pet-details/${_id}`} >View Details</Link> </Button>
-                    <Button>Adopt Now</Button>
+                    
                 </div>
             </Card>
         </div>

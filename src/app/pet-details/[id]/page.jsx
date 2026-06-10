@@ -1,5 +1,8 @@
+import AdoptModal from '@/component/AdoptModal';
+import { auth } from '@/lib/auth';
 import PetCard from '@/shared/PetCard';
 import { Button, Card, CloseButton } from '@heroui/react';
+import { headers } from 'next/headers';
 import React from 'react';
 import { BiInjection } from 'react-icons/bi';
 import { GiHealthNormal } from 'react-icons/gi';
@@ -7,11 +10,17 @@ import { IoLocationSharp } from 'react-icons/io5';
 import { MdAttachMoney } from 'react-icons/md';
 
 const PetDetailsPage = async ({ params }) => {
+
+const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    const user = session?.user;
+
     const { id } = await params;
     const res = await fetch(`http://localhost:8000/pets/${id}`);
     const pet = await res.json();
     const { _id, petName, gender, age, breed, species, imageUrl, adoptionFee, status, description,
-        healthStatus,vaccinationStatus ,location} = pet;
+        healthStatus,vaccinationStatus ,location,ownerEmail} = pet;
     console.log(pet)
     return (
         <div>
@@ -50,8 +59,10 @@ const PetDetailsPage = async ({ params }) => {
 
                     </Card.Header>
                     <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        
-                        <Button className="w-full sm:w-auto">Apply Now</Button>
+                        {
+                            ownerEmail!==user?.email && <AdoptModal pet={pet}></AdoptModal>
+                        }
+                       
                     </Card.Footer>
                 </div>
             </Card>

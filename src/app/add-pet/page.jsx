@@ -2,7 +2,9 @@
 import { authClient } from '@/lib/auth-client';
 import { Check } from '@gravity-ui/icons';
 import { Button, Card, Description, FieldError, Form, Input, Label, TextField, Select, ListBox } from '@heroui/react';
+import { redirect } from 'next/navigation';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 
 const AddPet = () => {
@@ -13,6 +15,7 @@ const AddPet = () => {
     const [gender, setGender] = useState('');
     const [vaccinationStatus, setVaccinationStatus] = useState('');
     const [healthStatus, setHealthStatus] = useState("");
+    const [species,setSpecies]=useState("")
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget)
@@ -21,6 +24,7 @@ const AddPet = () => {
             gender,
             vaccinationStatus,
             healthStatus,
+            species,
         }
         console.log(petData)
         const res = await fetch(`http://localhost:8000/pets`,
@@ -33,7 +37,11 @@ const AddPet = () => {
             }
         )
         const data = await res.json();
-        console.log(data);
+        if(data?.acknowledged) {
+            toast.success("Pet Added SuccessFully");
+            redirect('/my-listings')
+        }
+        else{ toast.error("failed to add pet")}
     }
     return (
         <div className='p-5'>
@@ -92,11 +100,11 @@ const AddPet = () => {
                             </Select.Trigger>
                             <Select.Popover>
                                 <ListBox>
-                                    <ListBox.Item id="male" name="gender" textValue="Male">
+                                    <ListBox.Item id="Male" name="gender" textValue="Male">
                                         Male
                                         <ListBox.ItemIndicator />
                                     </ListBox.Item>
-                                    <ListBox.Item id="female" name="gender" textValue="Female">
+                                    <ListBox.Item id="Female" name="gender" textValue="Female">
                                         Female
                                         <ListBox.ItemIndicator />
                                     </ListBox.Item>
@@ -128,6 +136,36 @@ const AddPet = () => {
                                 </ListBox>
                             </Select.Popover>
                         </Select>
+                              
+
+
+                         <Select className="w-[256px]" placeholder="Select one"
+                            onChange={(value) => setSpecies(value)}
+                        >
+                            <Label className='text-pink-600'>Species</Label>
+                            <Select.Trigger>
+                                <Select.Value />
+                                <Select.Indicator />
+                            </Select.Trigger>
+                            <Select.Popover>
+                                <ListBox>
+                                    <ListBox.Item id="Dog" name="species" textValue="Dog">
+                                        Dog
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
+                                    <ListBox.Item id="Cat" name="species" textValue="Cat">
+                                        Cat
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
+                                     <ListBox.Item id="other" name="species" textValue="Other">
+                                        Other
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
+                                </ListBox>
+                            </Select.Popover>
+                        </Select>
+
+
 
 
                         <Select className="w-[256px]" placeholder="Select one"
@@ -182,8 +220,15 @@ const AddPet = () => {
                             isRequired
                             name="adoptionFee"
                             type="text"
+                             validate={(value) => {
+
+                                if (/[A-Z]/.test(value) || /[a-z]/.test(value)) {
+                                    return "Fee must be a number";
+                                }
+                                return null;
+                            }}
                         >
-                            <Label className='text-pink-600'>Adoption Fee</Label>
+                            <Label className='text-pink-600'>Adoption Fee ($)</Label>
                             <Input />
                             <FieldError />
                         </TextField>
