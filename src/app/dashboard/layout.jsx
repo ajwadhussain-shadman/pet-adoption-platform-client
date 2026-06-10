@@ -12,9 +12,9 @@ const layout = ({children}) => {
         <p className="text-slate-500">Manage your pet adoption activities</p>
       </div>
       <Card className="m-5 flex flex-col md:h-screen">
-        <h2 className="text-2xl font-semibold">Quick Links</h2>
-        <div className=" flex-col flex gap-5">
-             <NavLink href={'/dashboard/add-pet'}>Add Pet</NavLink>
+        <h2 className=" text-lg md:text-2xl font-semibold">Quick Links</h2>
+        <div className=" flex-row text-sm md:flex-col  flex gap-5">
+             <NavLink  href={'/dashboard/add-pet'}>Add Pet</NavLink>
              <NavLink href={'/dashboard/my-requests'}>My Requests</NavLink>
             <NavLink href={'/dashboard/my-listings'}>My Listings</NavLink>
         </div>

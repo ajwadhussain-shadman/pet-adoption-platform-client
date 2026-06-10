@@ -46,8 +46,8 @@ const AddPet = () => {
     return (
         <div className='p-5'>
             <h1 className='text-2xl font-bold'>Add a new Pet</h1>
-            <Card className='my-5 w-220 mx-auto'>
-                <Form className="flex w-200 flex-col gap-4" onSubmit={onSubmit} >
+            <Card className='my-5 md:w-220 mx-auto'>
+                <Form className="flex w-full md:w-200 flex-col gap-4" onSubmit={onSubmit} >
                     <div className='flex flex-col sm:flex-row justify-between'>
                         <TextField
                             className=' w-full sm:w-96'
@@ -72,7 +72,7 @@ const AddPet = () => {
                     </div>
 
 
-                    <div className='flex  justify-between'>
+                    <div className='flex flex-col md:flex-row justify-between'>
                         <TextField
                             className='max-w-65'
                             isRequired
@@ -114,7 +114,7 @@ const AddPet = () => {
 
                     </div>
 
-                    <div className='flex justify-between'>
+                    <div className='flex flex-col md:flex-row justify-between'>
                         <Select className="w-[256px]" placeholder="Select one"
                             onChange={(value) => setVaccinationStatus(value)}
                         >

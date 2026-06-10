@@ -23,7 +23,7 @@ await authClient.signOut();
            <div className=' gap-6 hidden md:flex'>
             <NavLink href={'/'}>Home</NavLink>
             <NavLink href={'/all-pets'}>All Pets</NavLink>
-            <NavLink href={'/my-requests'}>My Requests</NavLink>
+            <NavLink href={'/dashboard/my-requests'}>My Requests</NavLink>
            </div>
 
          <div className='md:hidden'>
@@ -40,7 +40,7 @@ await authClient.signOut();
            <NavLink href={'/all-pets'}>All Pets</NavLink>
           </Dropdown.Item>
           <Dropdown.Item id="edit-file" textValue="">
-           <NavLink href={'/my-requests'}>My Requests</NavLink>
+           <NavLink href={'/dashboard/my-requests'}>My Requests</NavLink>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>

@@ -31,10 +31,10 @@ const PetCard = ({ pet }) => {
                     </ol>
                     <p className='text-xl font-semibold text-pink-700'> ${adoptionFee}</p>
                 </div>
-                <div className='flex gap-15 justify-center bg-slate-200 p-2 rounded-full'>
-                    <Button className='bg-pink-600'> <Link href={`/pet-details/${_id}`} >View Details</Link> </Button>
+              
+                    <Button className='bg-pink-600 w-full'> <Link href={`/pet-details/${_id}`} >View Details</Link> </Button>
                     
-                </div>
+            
             </Card>
         </div>
     );
