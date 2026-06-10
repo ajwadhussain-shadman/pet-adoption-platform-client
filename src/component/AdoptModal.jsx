@@ -45,7 +45,7 @@ const AdoptModal =  ({ pet }) => {
         <Modal>
             <Button className="bg-pink-600">Adopt the pet</Button>
             <Modal.Backdrop>
-                <Modal.Container>
+                <Modal.Container className="flex items-center justify-center min-h-screen">
                     <Modal.Dialog>
                         <Modal.CloseTrigger /> {/* Optional: Close button */}
                         <Modal.Header className='text-pink-600 font-bold'>

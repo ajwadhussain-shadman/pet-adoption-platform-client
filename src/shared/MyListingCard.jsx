@@ -1,7 +1,8 @@
 'use client'
 
+import EditModal from '@/component/EditModal';
 import RequestsModal from '@/component/RequestsModal';
-import { Badge, Button, Card } from '@heroui/react';
+import { AlertDialog, Badge, Button, Card } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -13,18 +14,18 @@ import { MdDeleteOutline } from 'react-icons/md';
 
 const MyListingCard = ({ pet }) => {
     const { _id, petName, gender, breed, species, imageUrl, adoptionFee, status } = pet;
-    
-    const handleDelete=async ()=>{
 
-        const res= await fetch(`http://localhost:8000/pets/${_id}`,{
-            method:'DELETE',
+    const handleDelete = async () => {
+
+        const res = await fetch(`http://localhost:8000/pets/${_id}`, {
+            method: 'DELETE',
         })
-        const data= await res.json()
-       if(data){
-        toast.success('successfully deleted')
-        window.location.reload()
-       }
-       else{ toast.error('failed to delete')}
+        const data = await res.json()
+        if (data) {
+            toast.success('successfully deleted')
+            window.location.reload()
+        }
+        else { toast.error('failed to delete') }
     }
 
     return (
@@ -38,50 +39,71 @@ const MyListingCard = ({ pet }) => {
                     className='w-full h-56  object-cover rounded-2xl'
                 ></Image>
                 <Badge
-                size='sm'
-                className={`absolute top-3 right-5 p-1 font-semibold ${status === 'available' ? 'bg-pink-700 text-white' : 'bg-gray-500 text-white'}`}
+                    size='sm'
+                    className={`absolute top-3 right-5 p-1 font-semibold ${status === 'available' ? 'bg-pink-700 text-white' : 'bg-gray-500 text-white'}`}
                 >
-         {status}
+                    {status}
                 </Badge>
             </div>
-                    
-                    <div className='flex justify-between'>
-                        <h2 className='text-pink-500 font-semibold text-xl'>{petName}</h2>
-                        <p className='text-green-700 font-bold' >${adoptionFee}</p>
-                    </div>
-                    <div className='flex  gap-7 font-bold text-amber-800 px-5'>
-                        <li>{species}</li>
-                        <li>{breed}</li>
-                    </div>
-                    
-                    <hr className='my-4 ' />
 
-                      <div className='grid grid-cols-2 justify-items-center gap-3'>
-                        <Link href={`/pet-details/${_id}`}>
-                        <Button size="sm" className='bg-pink-600 text-white'>
-                            View <IoEnterOutline className='inline-block' />
-                        </Button>
-                    </Link>
-                     <Link href={`/dashboard/edit-pet/${_id}`}>
-                        <Button size="sm" variant="bordered">
-                            Edit <FaEdit className='inline-block' />
-                        </Button>
-                    </Link>
-                
-                      <RequestsModal petId={_id}
-                    petName={petName}
-                    ></RequestsModal> 
-                
-                     <Button
-                        size="sm"
-                        variant='danger-soft'
-                        onPress={handleDelete}
-                    >
-                        Delete <MdDeleteOutline className='inline-block' />
+            <div className='flex justify-between'>
+                <h2 className='text-pink-500 font-semibold text-xl'>{petName}</h2>
+                <p className='text-green-700 font-bold' >${adoptionFee}</p>
+            </div>
+            <div className='flex  gap-7 font-bold text-amber-800 px-5'>
+                <li>{species}</li>
+                <li>{breed}</li>
+            </div>
+
+            <hr className='my-4 ' />
+
+            <div className='grid grid-cols-2 justify-items-center gap-3'>
+                <Link href={`/pet-details/${_id}`}>
+                    <Button size="sm" className='bg-pink-600 text-white'>
+                        View <IoEnterOutline className='inline-block' />
                     </Button>
-                      </div>
+                </Link>
+              <EditModal pet={pet}></EditModal>
+
+                <RequestsModal petId={_id}
+                    petName={petName}
+                ></RequestsModal>
+
+                <AlertDialog>
+                    <Button variant="danger">Delete <MdDeleteOutline className='inline-block' /> </Button>
+                    <AlertDialog.Backdrop>
+                        <AlertDialog.Container>
+                            <AlertDialog.Dialog className="sm:max-w-[400px]">
+                                <AlertDialog.CloseTrigger />
+                                <AlertDialog.Header>
+                                    <AlertDialog.Icon status="danger" />
+                                    <AlertDialog.Heading>Delete pet data permanently?</AlertDialog.Heading>
+                                </AlertDialog.Header>
+                                <AlertDialog.Body>
+                                    <p>
+                                        This will permanently delete <strong>{petName}</strong> and all of its
+                                        data. This action cannot be undone.
+                                    </p>
+                                </AlertDialog.Body>
+                                <AlertDialog.Footer>
+                                    <Button slot="close" variant="tertiary">
+                                        Cancel
+                                    </Button>
+                                    <Button slot="close" variant="danger"
+                                     onPress={handleDelete}
+                                    >
+                                        Delete Project
+                                    </Button>
+                                </AlertDialog.Footer>
+                            </AlertDialog.Dialog>
+                        </AlertDialog.Container>
+                    </AlertDialog.Backdrop>
+                </AlertDialog>
+
+
+            </div>
         </Card>
-           
+
     );
 };
 
