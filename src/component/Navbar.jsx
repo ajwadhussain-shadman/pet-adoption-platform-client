@@ -11,8 +11,10 @@ import { authClient } from '@/lib/auth-client';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 const Navbar = () => {
   const [open,setOpen]=useState(false);
-  const userData= authClient.useSession();
- const user=userData?.data?.user;
+
+const { data, isPending } = authClient.useSession();
+const user = data?.user;
+
   const handleSignOut= async ()=>{
 await authClient.signOut();
   }
@@ -49,14 +51,18 @@ await authClient.signOut();
 
            <div className='flex gap-2'>
 
+        
 
-            <div>
+        {
+          isPending ? <p className='text-sm font-bold text-pink-600'>Loading...</p> :
+          <div>
               {
                 user ? 
                 <Dropdown onOpenChange={setOpen}>
      
        <Button className='bg-pink-50'>
         <Image className='rounded-full' src={user.image} alt={user.name} height={40} width={40}></Image>
+        <span className='text-black text-sm font-light'>{user.name.split(" ")[0]}</span>
         {
           open ? <FaArrowUp className='inline-block text-black ml-2' /> : <FaArrowDown className='inline-block text-black ml-2' />
         }
@@ -65,12 +71,15 @@ await authClient.signOut();
       
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
+          <Dropdown.Item  textValue="New file">
+        <p className='font-semibold text-sm'>{user.name}</p>
+          </Dropdown.Item>
           <Dropdown.Item id="new-file" textValue="New file">
-         <Button className='text-pink-700 bg-pink-100 w-full'> <Link href={'/dashboard'}>DashBoard</Link></Button>
+        <Link href={'/dashboard'} className='w-full'> <Button className='text-pink-700 bg-pink-100 w-full'> DashBoard</Button></Link>
         
           </Dropdown.Item>
           <Dropdown.Item id="copy-link" textValue="Copy link">
-            <Button className='text-pink-700 bg-pink-100 w-full' onClick={handleSignOut}> <Link href={'/sign-up'}>LogOut</Link></Button>
+             <Link href={'/sign-up'} className='w-full'><Button className='text-pink-700 bg-pink-100 w-full' onClick={handleSignOut}>LogOut</Button></Link>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>
@@ -79,11 +88,13 @@ await authClient.signOut();
                 
                  : <div className='flex gap-3'>
 
-                   <Button className='text-white bg-pink-700 w-full'><Link href={'/login'}>Login</Link></Button>
-                   <Button className='text-pink-700 bg-pink-100 w-full'> <Link href={'/sign-up'}>Sign Up</Link></Button>
+                 <Link href={'/login'}>  <Button className='text-white bg-pink-700 w-full'>Login</Button></Link>
+                 <Link href={'/sign-up'}>  <Button className='text-pink-700 bg-pink-100 w-full'> Sign Up</Button></Link>
                 </div>
               }
             </div>
+        }
+            
 
            </div>
         </nav>

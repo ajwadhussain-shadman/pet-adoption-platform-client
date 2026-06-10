@@ -17,7 +17,15 @@ const session = await auth.api.getSession({
     const user = session?.user;
 
     const { id } = await params;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`);
+    const {token}= await auth.api.getToken(
+        {headers : await headers()}
+    )
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`,{
+        headers:{
+            authorization:`Bearer ${token}`
+        }
+    });
     const pet = await res.json();
     const { _id, petName, gender, age, breed, species, imageUrl, adoptionFee, status, description,
         healthStatus,vaccinationStatus ,location,ownerEmail} = pet;

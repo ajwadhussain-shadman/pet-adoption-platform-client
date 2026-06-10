@@ -1,4 +1,5 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { AlertDialog, Button, Card, CloseButton } from '@heroui/react';
 import { format } from 'date-fns';
 import Image from 'next/image';
@@ -10,8 +11,12 @@ import { MdDeleteOutline } from 'react-icons/md';
 const RequestCard = ({ req }) => {
     const { _id, petImage, petName, requestDate, pickupDate, status, petId } = req
     const handleDelete = async (id) => {
+       const {data:tokenData}= await authClient.token()
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/delete/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers:{
+                authorization:`Bearer ${tokenData?.token}`
+            }
         })
         const data = await res.json();
         console.log(data)

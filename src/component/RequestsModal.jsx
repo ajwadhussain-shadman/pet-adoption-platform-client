@@ -4,15 +4,21 @@ import toast from 'react-hot-toast';
 import { Rocket } from '@gravity-ui/icons';
 import { LuCircleArrowOutDownLeft } from 'react-icons/lu';
 import { useEffect, useState } from 'react';
+import { authClient } from '@/lib/auth-client';
 
 
 const RequestsModal = ({ petId, petName }) => {
 
     const [loading, setLoading] = useState(true);
     const [request, setRequest] = useState(null);
-
+      
     const fetchData = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/pet/${petId}`);
+        const {data:tokenData}= await authClient.token()
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/pet/${petId}`,{
+            headers:{
+                authorization:`Bearer ${tokenData?.token}`
+            }
+        });
         const data = await res.json();
         setLoading(false)
         setRequest(data);

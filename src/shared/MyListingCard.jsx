@@ -2,6 +2,7 @@
 
 import EditModal from '@/component/EditModal';
 import RequestsModal from '@/component/RequestsModal';
+import { authClient } from '@/lib/auth-client';
 import { AlertDialog, Badge, Button, Card } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,11 +15,15 @@ import { MdDeleteOutline } from 'react-icons/md';
 
 const MyListingCard = ({ pet }) => {
     const { _id, petName, gender, breed, species, imageUrl, adoptionFee, status } = pet;
-
+    
+           
     const handleDelete = async () => {
-
+         const {data:tokenData}= await authClient.token()
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${_id}`, {
             method: 'DELETE',
+            headers:{
+                authorization:`Bearer ${tokenData?.token}`
+            }
         })
         const data = await res.json()
         if (data) {

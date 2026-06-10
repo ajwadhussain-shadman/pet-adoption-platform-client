@@ -7,9 +7,16 @@ const MyRequests =async() => {
     const session = await auth.api.getSession({
             headers: await headers(),
         });
+         const {token}= await auth.api.getToken(
+                    {headers : await headers()}
+                )
         const user = session?.user;
-        console.log(user?.email)
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request?email=${user?.email}`);
+        
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request?email=${user?.email}`,{
+                    headers:{
+                        authorization:`Bearer ${token}`
+                    }
+                });
         const myRequest = await res.json();
         console.log(myRequest)
     return (

@@ -1,6 +1,9 @@
+
+
 import { authClient } from '@/lib/auth-client';
 import { Check } from '@gravity-ui/icons';
 import { Button, Card, FieldError, Select, Form, Input, Label, Modal, TextField, ListBox } from '@heroui/react';
+
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaEdit } from 'react-icons/fa';
@@ -28,13 +31,15 @@ const EditModal = ({ pet }) => {
             healthStatus,
             species,
         }
+       const {data:tokenData}= await authClient.token()
 
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${_id}`,
             {
                 method: 'PATCH',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    authorization:`Bearer ${tokenData?.token}`
                 },
                 body: JSON.stringify(petData)
             }
