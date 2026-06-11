@@ -48,7 +48,7 @@ const session = await auth.api.getSession({
                             {description}
                         </Card.Description>
 
-                        <div className=' grid grid-cols-1 md:grid-cols-2  font-semibold text-pink-600'>
+                        <div className=' grid grid-cols-1 md:grid-cols-2  gap-2 font-semibold text-pink-600'>
                             <p>Age:{age}</p>
                             <p> Species : {species}</p>
                             <p> Breed : {breed}</p>
@@ -68,10 +68,10 @@ const session = await auth.api.getSession({
                     </Card.Header>
                     <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
                         {
-                            ownerEmail===user?.email && <p className='text-pink-600 text-sm font-bold'>(!) You can not adopt your own pet</p>
+                            ownerEmail===user?.email && <p className='text-pink-600 text-sm font-bold'>(!)You can not adopt your own pet</p>
                         }
                          {
-                           (status==='adopted' && ownerEmail!==user?.email )  && <p className='text-pink-600 text-sm font-bold'>(!) This pet is not available</p>
+                           (status==='adopted' && ownerEmail!==user?.email )  && <p className='text-pink-600 text-sm font-bold'>(!)This pet is already adopted</p>
                         }
                         {
                            (status!=='adopted' && ownerEmail!==user?.email ) && <AdoptModal pet={pet}></AdoptModal>

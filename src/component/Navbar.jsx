@@ -21,7 +21,7 @@ await authClient.signOut();
     return (
         <div className='shadow '>
             <nav className='flex justify-between items-center container  mx-auto '>
-           <Link href={'/'}> <Image src={PetLogo} alt='pet logo' height={200} width={200}></Image></Link>
+           <Link href={'/'}> <Image src={PetLogo} alt='pet logo' height={200} width={200} ></Image></Link>
            <div className=' gap-6 hidden md:flex'>
             <NavLink href={'/'}>Home</NavLink>
             <NavLink href={'/all-pets'}>All Pets</NavLink>
