@@ -71,7 +71,7 @@ const RequestsModal = ({ petId, petName }) => {
                                 request.map(req => {
                                     return <div key={req._id} className=' '>
 
-                                        {req.status === 'pending' &&
+                                       
                                             <div className='p-4 border rounded-2xl bg-pink-200 text-slate-800 '>
                                                 <div className='flex    p-2 rounded-full b border-slate-400 justify-between '>
                                                     <p>Name: {req.requesterName}</p>
@@ -106,7 +106,7 @@ const RequestsModal = ({ petId, petName }) => {
                                                 }
                                             </div>
 
-                                        }
+                                        
 
                                     </div>
                                 })
