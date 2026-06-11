@@ -31,9 +31,9 @@ const session = await auth.api.getSession({
         healthStatus,vaccinationStatus ,location,ownerEmail} = pet;
     console.log(pet)
     return (
-        <div>
+        <div className='my-5 mx-2'>
             <Card className="w-full items-stretch md:flex-row">
-                <div className="h-full w-[400px] ">
+                <div className="h-full max-w-[400px] ">
                     <img
                         src={imageUrl}
                         alt={petName}
@@ -48,14 +48,14 @@ const session = await auth.api.getSession({
                             {description}
                         </Card.Description>
 
-                        <div className='grid grid-cols-2  font-semibold text-pink-600'>
+                        <div className=' grid grid-cols-1 md:grid-cols-2  font-semibold text-pink-600'>
                             <p>Age:{age}</p>
                             <p> Species : {species}</p>
                             <p> Breed : {breed}</p>
                             <p> Gender :  {gender}</p>
                             
                         </div>
-                        <div className='flex gap-10 '>
+                        <div className='flex flex-col md:flex-row gap-10 '>
                             <p className='flex items-center gap-1 font-semibold'> <GiHealthNormal className='inline-block text-pink-600 ' />Health: {healthStatus}</p>
                             <p className='flex items-center gap-1 font-semibold'> <BiInjection className='inline-block text-pink-600 ' />Vaccination: {vaccinationStatus}</p>
                         </div>
@@ -68,7 +68,13 @@ const session = await auth.api.getSession({
                     </Card.Header>
                     <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
                         {
-                            ownerEmail!==user?.email && <AdoptModal pet={pet}></AdoptModal>
+                            ownerEmail===user?.email && <p className='text-pink-600 text-sm font-bold'>(!) You can not adopt your own pet</p>
+                        }
+                         {
+                           (status==='adopted' && ownerEmail!==user?.email )  && <p className='text-pink-600 text-sm font-bold'>(!) This pet is not available</p>
+                        }
+                        {
+                           (status!=='adopted' && ownerEmail!==user?.email ) && <AdoptModal pet={pet}></AdoptModal>
                         }
                        
                     </Card.Footer>

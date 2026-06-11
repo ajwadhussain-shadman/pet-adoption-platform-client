@@ -86,10 +86,10 @@ await authClient.signOut();
     </Dropdown>
                 
                 
-                 : <div className='flex gap-3'>
+                 : <div className='flex flex-col sm:flex-row gap-2 mr-2  my-1 sm:gap-3'>
 
-                 <Link href={'/login'}>  <Button className='text-white bg-pink-700 w-full'>Login</Button></Link>
-                 <Link href={'/sign-up'}>  <Button className='text-pink-700 bg-pink-100 w-full'> Sign Up</Button></Link>
+                 <Link href={'/login'}>  <Button size='sm' className='text-white text-sm bg-pink-700 w-full'>Login</Button></Link>
+                 <Link href={'/sign-up'}>  <Button size='sm' className='text-pink-700 bg-pink-100 w-full'> Sign Up</Button></Link>
                 </div>
               }
             </div>
