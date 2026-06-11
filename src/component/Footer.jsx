@@ -25,8 +25,8 @@ const Footer = () => {
                 <h2 className='font-semibold text-lg'>Quick Links</h2>
                 <li className='underline'><Link href={'/'}>Home</Link></li>
                 <li className='underline'><Link href={'/all-pets'}>All Pets</Link></li>
-                <li className='underline'><Link href={'/my-requests'}>My Requests</Link></li>
-                <li className='underline'><Link href={'/add-pet'}>Add Pet</Link></li>
+                <li className='underline'><Link href={'/dashboard/my-requests'}>My Requests</Link></li>
+                <li className='underline'><Link href={'/dashboard/add-pet'}>Add Pet</Link></li>
             </div>
             <div className='pl-4 md:pl-0'>
                 <h2 className='font-semibold text-lg'>Support</h2>
