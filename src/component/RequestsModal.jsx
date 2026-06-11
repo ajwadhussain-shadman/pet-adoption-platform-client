@@ -63,7 +63,7 @@ const RequestsModal = ({ petId, petName }) => {
 
                             {loading && <p>Data is Loading</p>}
 
-                            {!loading && request.length === 0 && (
+                            {!loading && !request   && (
                                 <p className='text-center text-red-500 py-4'>No Request For {petName}</p>
                             )}
                             {

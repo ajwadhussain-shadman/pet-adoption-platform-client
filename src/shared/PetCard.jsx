@@ -32,7 +32,7 @@ const PetCard = ({ pet }) => {
                     <p className='text-xl font-semibold text-pink-700'> ${adoptionFee}</p>
                 </div>
               
-                    <Button className='bg-pink-600 w-full'> <Link href={`/pet-details/${_id}`} >View Details</Link> </Button>
+                  <Link href={`/pet-details/${_id}`} >  <Button className='bg-pink-600 w-full'> View Details </Button></Link>
                     
             
             </Card>
