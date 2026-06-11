@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pet Adoption Platform
 
-## Getting Started
+## Purpose
+Pet Adoption is a full-stack pet adoption platform where users can explore pets available for adoption, view detailed pet profiles, and submit adoption requests. Pet owners can manage their listings and handle adoption requests by approving or rejecting them.
 
-First, run the development server:
+## Live URL
+https://pet-adoption-platform-xi.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- Browse all available pets with search by name and filter by species
+-  Submit adoption requests with pickup date and message
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-  Secure authentication with email/password and Google login
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Pet owners can add, edit, and delete their pet listings
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-  Approve or reject adoption requests , approving one automatically rejects all others
+- Dashboard with stats showing total listings, available, and adopted pets
+-  Prevents duplicate requests and owners adopting their own pets
 
-## Learn More
+## NPM Packages Used
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- next js
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- tailwindcss
 
-## Deploy on Vercel
+- @heroui/react 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- better-auth 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- react-hot-toast  
+
+- react-icons
+
+- @gravity-ui/icons 
+
+### Backend
+- express js
+
+- mongodb
+
+- cors
+
+- dotenv
+
+- nodemon
+
